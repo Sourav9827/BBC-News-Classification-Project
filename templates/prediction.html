@@ -1,0 +1,23 @@
+{% extends "index.html"%}
+{% block content %}
+
+<div class="login">
+
+    <h2>Fire or Not Fire Prediction</h2>
+
+    <!-- Main Input For Receiving Query to our ML -->
+   <form action="{{ url_for('predict_api')}}" method="post">
+
+      <input type="file" name="text_file" placeholder="text" required="required" /><br>  
+
+       <button type="submit" class="btn btn-primary btn-block btn-large" >Predict</button>
+   </form>
+
+  <br>
+  <br>
+
+</div>
+
+<h1> {{prediction_text}} </h1>
+
+{% endblock %}
