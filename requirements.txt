@@ -1,0 +1,16 @@
+tensorflow
+pandas
+notebook
+numpy
+matplotlib
+seaborn
+fastapi
+transformers
+sklearn
+Flask
+Jinja2
+SQLAlchemy
+Werkzeug
+WTForms
+gunicorn
+MarkupSafe
