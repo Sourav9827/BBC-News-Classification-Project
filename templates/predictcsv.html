@@ -1,0 +1,23 @@
+{% extends "index.html"%}
+{% block content %}
+
+<div class="login">
+
+    <h2>Enter the CSV</h2>
+
+    <!-- Main Input For Receiving Query to our ML -->
+   <form action="{{ url_for('predict_df')}}" method="post" enctype="multipart/form-data">
+
+      <input type="file" name="df_file" placeholder="Upload File" required="required" /><br>  
+
+       <button type="submit" class="btn btn-primary btn-block btn-large" >Predict News Category</button>
+   </form>
+
+  <br>
+  <br>
+
+</div>
+
+{{ data_var|safe }}
+
+{% endblock %}

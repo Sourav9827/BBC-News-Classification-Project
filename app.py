@@ -1,10 +1,11 @@
-from flask import Flask,request,app,render_template
+from flask import Flask,request,app,render_template, Response
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 import transformers
 from transformers import AutoTokenizer,TFDistilBertModel, DistilBertConfig
 from transformers import TFAutoModel
+from IPython.display import display
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -66,12 +67,20 @@ def index():
 def predict_api_cat():
     return render_template('prediction.html')
 
-@app.route('/predict_cat',methods=['GET','POST'])
+@app.route('/predict_cat', methods=['GET','POST'])
 def predict_cat():
 
     output = category_predict(request.form['text_file'])
     return render_template('prediction.html', prediction_text="The news is a {} news".format(output))
 
+@app.route('/predict_api_df', methods=['GET','POST'])
+def predict_api_df():
+    return render_template('predictcsv.html')
+
+@app.route('/predict_df', methods=['GET','POST'])
+def predict_df():
+    df = df_predict(request.files['df_file'])
+    return Response(df.to_html())
 
 if __name__=="__main__":
     app.run(debug=True)
