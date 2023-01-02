@@ -48,6 +48,16 @@ def category_predict(text):
   category = pd.DataFrame(df_test_result.set_index('Text').idxmax(axis = 'columns'), columns = ['Category']).iloc[:1]['Category'][0]
   return category
 
+def df_predict(file):
+  df = pd.read_csv(file, header=0, encoding='cp1252')
+  df_input_ids, df_attention_mask = text_encode(df['Text'], tokenizer, max_len=100)
+  df_predict = model.predict([df_input_ids, df_attention_mask])
+  column_values = ['business', 'entertainment', 'politics', 'sport', 'tech']
+  df2 = pd.DataFrame(data = df_predict, columns = column_values)  
+  df_test_result = pd.concat([df, df2], axis=1)
+  df_result = pd.DataFrame(df_test_result.set_index('Text').idxmax(axis = 'columns'), columns = ['Category'])
+  return df_result
+
 @app.route('/')
 def index():
     return render_template('index.html')
