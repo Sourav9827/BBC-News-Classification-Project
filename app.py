@@ -1,4 +1,4 @@
-from flask import Flask,request,app,jsonify,url_for,render_template
+from flask import Flask,request,app,render_template
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -52,8 +52,12 @@ def category_predict(text):
 def index():
     return render_template('index.html')
 
-@app.route('/predict_api',methods=['GET','POST'])
-def predict_api():
+@app.route('/predict_api_cat')
+def predict_api_cat():
+    return render_template('prediction.html')
+
+@app.route('/predict_cat',methods=['GET','POST'])
+def predict_cat():
 
     output = category_predict(request.form['text_file'])
     return render_template('prediction.html', prediction_text="The news is a {} news".format(output))
