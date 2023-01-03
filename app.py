@@ -2,10 +2,9 @@ from flask import Flask, request, app, render_template, Response
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-import transformers
-from transformers import AutoTokenizer,TFDistilBertModel, DistilBertConfig
-from transformers import TFAutoModel
+from transformers import AutoTokenizer,TFDistilBertModel
 import requests
+import os
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -16,9 +15,11 @@ app=Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
 
 def load_model(url):
-    response = requests.get(url)
-    with open('model/model.h5', 'wb') as f:
-        f.write(response.content)
+    files = os.listdir('model')
+    if 'model.h5' not in files:
+        response = requests.get(url)
+        with open('model/model.h5', 'wb') as f:
+            f.write(response.content)
     model = tf.keras.models.load_model('model/model.h5', custom_objects={'TFDistilBertModel': TFDistilBertModel})
     return model
     
