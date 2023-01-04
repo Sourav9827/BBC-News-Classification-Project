@@ -13,6 +13,5 @@ SQLAlchemy
 Werkzeug
 WTForms
 gunicorn
-MarkupSafe
 
 -e .

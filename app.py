@@ -1,10 +1,4 @@
 from flask import Flask, request, app, render_template, Response
-import numpy as np
-import pandas as pd
-import tensorflow as tf
-from transformers import AutoTokenizer,TFDistilBertModel
-import requests
-import os
 from src.utils import *
 
 import warnings
