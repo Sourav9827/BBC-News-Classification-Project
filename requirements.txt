@@ -13,5 +13,4 @@ SQLAlchemy
 Werkzeug
 WTForms
 gunicorn
-
 -e .
