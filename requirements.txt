@@ -14,5 +14,4 @@ Werkzeug
 WTForms
 gunicorn
 MarkupSafe
-gunicorn
 -e .
